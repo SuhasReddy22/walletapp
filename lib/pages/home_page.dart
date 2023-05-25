@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               IconButton(
-                onPressed: () ,
+                onPressed: () {},
                 icon: Icon(
                   Icons.settings,
                   size: 32,
