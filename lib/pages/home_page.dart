@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: Colors.pink,
-        child: Icon(
+        child: const Icon(
           Icons.monetization_on,
           size: 32,
         ),
@@ -31,9 +31,9 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomAppBar(
         color: Colors.grey[200],
         child: Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: const EdgeInsets.only(top: 10.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
                 onPressed: () {},
@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
               ),
               IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.settings,
                   size: 32,
                   color: Colors.grey,
@@ -55,141 +55,143 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            // app bar
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        'My',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            children: [
+              // app bar
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: const [
+                        Text(
+                          'My',
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      SizedBox(width: 5),
-                      Text(
-                        'Cards',
-                        style: TextStyle(fontSize: 28),
-                      ),
-                    ],
-                  ),
-
-                  // plus button
-                  Container(
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[400],
-                      shape: BoxShape.circle,
+                        SizedBox(width: 5),
+                        Text(
+                          'Cards',
+                          style: TextStyle(fontSize: 28),
+                        ),
+                      ],
                     ),
-                    child: Icon(Icons.add),
-                  ),
-                ],
+      
+                    // plus button
+                    Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[400],
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.add),
+                    ),
+                  ],
+                ),
               ),
-            ),
-
-            SizedBox(height: 25),
-
-            // cards
-            Container(
-              height: 200,
-              child: PageView(
-                scrollDirection: Axis.horizontal,
+      
+              const SizedBox(height: 25),
+      
+              // cards
+              Container(
+                height: 200,
+                child: PageView(
+                  scrollDirection: Axis.horizontal,
+                  controller: _controller,
+                  children: [
+                    MyCard(
+                      balance: 5250.20,
+                      cardNumber: 12345678,
+                      expiryMonth: 10,
+                      expiryYear: 24,
+                      color: Colors.deepPurple[300],
+                    ),
+                    MyCard(
+                      balance: 342.23,
+                      cardNumber: 12345678,
+                      expiryMonth: 11,
+                      expiryYear: 23,
+                      color: Colors.green[300],
+                    ),
+                    MyCard(
+                      balance: 420.42,
+                      cardNumber: 12345678,
+                      expiryMonth: 8,
+                      expiryYear: 22,
+                      color: Colors.yellow[300],
+                    ),
+                  ],
+                ),
+              ),
+      
+              const SizedBox(height: 25),
+      
+              SmoothPageIndicator(
                 controller: _controller,
-                children: [
-                  MyCard(
-                    balance: 5250.20,
-                    cardNumber: 12345678,
-                    expiryMonth: 10,
-                    expiryYear: 24,
-                    color: Colors.deepPurple[300],
-                  ),
-                  MyCard(
-                    balance: 342.23,
-                    cardNumber: 12345678,
-                    expiryMonth: 11,
-                    expiryYear: 23,
-                    color: Colors.green[300],
-                  ),
-                  MyCard(
-                    balance: 420.42,
-                    cardNumber: 12345678,
-                    expiryMonth: 8,
-                    expiryYear: 22,
-                    color: Colors.yellow[300],
-                  ),
-                ],
+                count: 3,
+                effect: ExpandingDotsEffect(
+                  activeDotColor: Colors.grey.shade800,
+                ),
               ),
-            ),
-
-            SizedBox(height: 25),
-
-            SmoothPageIndicator(
-              controller: _controller,
-              count: 3,
-              effect: ExpandingDotsEffect(
-                activeDotColor: Colors.grey.shade800,
+              const SizedBox(height: 20),
+      
+              // 3 buttons -> send + pay + bills
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    // send button
+                    MyButton(
+                      iconImagePath: 'lib/icons/send-money.png',
+                      buttonText: 'Send',
+                    ),
+      
+                    // pay button
+                    MyButton(
+                      iconImagePath: 'lib/icons/credit-card.png',
+                      buttonText: 'Pay',
+                    ),
+      
+                    //bills button
+                    MyButton(
+                      iconImagePath: 'lib/icons/bill.png',
+                      buttonText: 'Bills',
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-
-            // 3 buttons -> send + pay + bills
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // send button
-                  MyButton(
-                    iconImagePath: 'lib/icons/send-money.png',
-                    buttonText: 'Send',
-                  ),
-
-                  // pay button
-                  MyButton(
-                    iconImagePath: 'lib/icons/credit-card.png',
-                    buttonText: 'Pay',
-                  ),
-
-                  //bills button
-                  MyButton(
-                    iconImagePath: 'lib/icons/bill.png',
-                    buttonText: 'Bills',
-                  ),
-                ],
-              ),
-            ),
-
-            SizedBox(height: 40),
-
-            // column -> stats + transaction
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: Column(
-                children: [
-                  // statistics
-                  MyListTile(
-                    iconImagePath: 'lib/icons/statistics.png',
-                    titleTitle: 'Statistics',
-                    titleSubTitle: 'Payment and Income',
-                  ),
-
-                  // tarnsactions
-                  MyListTile(
-                    iconImagePath: 'lib/icons/transactional.png',
-                    titleTitle: 'Transactions',
-                    titleSubTitle: 'Transactions History',
-                  ),
-                ],
-              ),
-            )
-          ],
+      
+              const SizedBox(height: 40),
+      
+              // column -> stats + transaction
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Column(
+                  children: const [
+                    // statistics
+                    MyListTile(
+                      iconImagePath: 'lib/icons/statistics.png',
+                      titleTitle: 'Statistics',
+                      titleSubTitle: 'Payment and Income',
+                    ),
+      
+                    // tarnsactions
+                    MyListTile(
+                      iconImagePath: 'lib/icons/transactional.png',
+                      titleTitle: 'Transactions',
+                      titleSubTitle: 'Transactions History',
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
